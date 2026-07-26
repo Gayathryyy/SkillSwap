@@ -36,9 +36,33 @@ SkillSwap is a Django-based platform where users can share skills, learn from ot
 - notifications - User notifications
 - reviews - Rating and feedback system
 
+
+
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Browse Users
+![Browse Users](screenshots/browse_skills.jpeg)
+
+### Profile
+![Profile](screenshots/public_profile.png)
+
+### Inbox
+![Inbox](screenshots/inbox.png)
+
+### Notifications
+![Notifications](screenshots/notifications.png)
+
+
 ## ⚙️ Installation
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/Gayathryyy/SkillSwap.git
+
