@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body p-5">
+
+                    <div class="text-center">
+
+                        {% if profile.profile_picture %}
+                            <img src="{{ profile.profile_picture.url }}"
+                                 class="rounded-circle mb-3"
+                                 width="150"
+                                 height="150"
+                                 style="object-fit: cover;">
+                        {% endif %}
+
+                        <h2>{{ request.user.username }}</h2>
+
+                        <p class="text-muted">
+                            {{ request.user.email }}
+                        </p>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <h6>Phone</h6>
+
+                            <p>{{ profile.phone|default:"Not Added" }}</p>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h6>Location</h6>
+
+                            <p>{{ profile.location|default:"Not Added" }}</p>
+
+                        </div>
+
+                    </div>
+
+                    <h6>Bio</h6>
+
+                    <p>{{ profile.bio|default:"No bio yet." }}</p>
+
+                    <div class="text-center mt-4">
+
+                        <a href="{% url 'edit_profile' %}"
+                           class="btn btn-primary px-4">
+
+                            Edit Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

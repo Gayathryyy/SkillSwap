@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="mb-4">
+
+📤 My Sent Requests
+
+</h2>
+
+{% if requests %}
+
+    {% for request in requests %}
+
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+
+            <h5>
+
+                To:
+
+                {{ request.receiver.username }}
+
+            </h5>
+
+            <hr>
+
+            <p>
+
+                <strong>Requested:</strong>
+
+                {{ request.skill_requested.name }}
+
+            </p>
+
+            <p>
+
+                <strong>Offered:</strong>
+
+                {{ request.skill_offered.name }}
+
+            </p>
+
+            {% if request.message %}
+
+            <p>
+
+                <strong>Message:</strong>
+
+                {{ request.message }}
+
+            </p>
+
+            {% endif %}
+
+            {% if request.status == "pending" %}
+
+    <span class="badge bg-warning">
+
+        Pending
+
+    </span>
+
+{% elif request.status == "accepted" %}
+
+    <span class="badge bg-success">
+
+        Accepted
+
+    </span>
+
+{% elif request.status == "completed" %}
+
+    <span class="badge bg-info">
+
+        Completed
+
+    </span>
+
+    <div class="mt-3">
+
+        <a href="{% url 'add_review' request.id %}"
+           class="btn btn-warning">
+
+            ⭐ Leave Review
+
+        </a>
+
+    </div>
+
+{% elif request.status == "rejected" %}
+
+    <span class="badge bg-danger">
+
+        Rejected
+
+    </span>
+
+{% endif %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<div class="alert alert-info">
+
+You haven't sent any requests yet.
+
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

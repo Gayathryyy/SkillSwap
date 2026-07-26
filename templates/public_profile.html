@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-body p-5">
+
+                 <div class="text-center mb-5">
+
+    <img
+        src="{{ profile_user.profile.profile_picture.url }}"
+        class="rounded-circle shadow"
+        width="170"
+        height="170"
+        style="object-fit:cover; border:5px solid white;">
+
+    <h2 class="fw-bold mt-3">
+
+        {{ profile_user.username }}
+
+    </h2>
+
+    {% if profile_user.profile.location %}
+
+    <p class="text-muted">
+
+        <i class="bi bi-geo-alt-fill text-danger"></i>
+
+        {{ profile_user.profile.location }}
+
+    </p>
+
+    {% endif %}
+
+</div>
+
+                    {% if profile_user.profile.bio %}
+
+                        <hr>
+
+                        <h4 class="mb-3">
+
+<i class="bi bi-person-lines-fill text-primary"></i>
+
+About
+
+</h4>
+
+                        <p>
+
+                            {{ profile_user.profile.bio }}
+
+                        </p>
+
+                    {% endif %}
+
+                    <hr>
+
+                    <h4 class="mt-5 mb-3">
+
+<i class="bi bi-mortarboard-fill text-success"></i>
+
+Can Teach
+
+</h4>
+
+                    {% for skill in profile_user.skills.all %}
+
+                        {% if skill.skill_type == "teach" %}
+
+                            <span class="badge bg-success m-1">
+
+                                {{ skill.name }}
+
+                            </span>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <hr>
+<hr class="my-5">
+
+<h3 class="mb-4 fw-bold">
+
+<i class="bi bi-star-fill text-warning"></i>
+
+Reviews
+
+</h3>
+
+{% if average_rating %}
+
+<div class="card bg-warning-subtle border-0 shadow-sm mb-4">
+    <div class="card-body text-center">
+
+    <h5>
+
+        Average Rating:
+        ⭐ {{ average_rating|floatformat:1 }}/5
+
+    </h5>
+
+</div>
+    </div>
+
+{% endif %}
+
+{% if reviews %}
+
+    {% for review in reviews %}
+
+    <div class="card shadow-sm mb-3">
+
+        <div class="card-body">
+
+            <h5>
+
+                {% for i in "12345" %}
+
+                    {% if forloop.counter <= review.rating %}
+
+                        ⭐
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </h5>
+
+            <p>
+
+                {{ review.comment }}
+
+            </p>
+
+            <small class="text-muted">
+
+                — {{ review.reviewer.username }}
+
+            </small>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<div class="alert alert-info">
+
+No reviews yet.
+
+</div>
+
+{% endif %}
+                    <h4 class="mt-5 mb-3">
+
+<i class="bi bi-lightbulb-fill text-primary"></i>
+
+Wants To Learn
+
+</h4>
+
+                    {% for skill in profile_user.skills.all %}
+
+                        {% if skill.skill_type == "learn" %}
+
+                            <span class="badge bg-primary m-1">
+
+                                {{ skill.name }}
+
+                            </span>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <div class="text-center mt-4">
+
+                        <a href="{% url 'send_exchange' profile_user.id %}"
+   class="btn btn-success btn-lg px-5">
+
+    <i class="bi bi-arrow-left-right"></i>
+
+    Request Skill Swap
+
+</a>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

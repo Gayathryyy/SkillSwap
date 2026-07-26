@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center p-5">
+
+                    <h3>
+
+                        Delete Skill
+
+                    </h3>
+
+                    <p class="mt-3">
+
+                        Are you sure you want to delete
+
+                        <strong>{{ skill.name }}</strong>?
+
+                    </p>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <button class="btn btn-danger">
+
+                            Yes, Delete
+
+                        </button>
+
+                        <a href="{% url 'my_skills' %}"
+                           class="btn btn-secondary">
+
+                            Cancel
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
